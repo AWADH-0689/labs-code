@@ -1,24 +1,31 @@
 #include <stdio.h>
 
-// Function to calculate remaining area
-float calculate_remaining_area(float total_area, float used_area) {
-    return total_area - used_area;
+// Function to calculate remaining distance (should be 0 when they meet)
+float calculate_remaining_distance(float distance, float speed1, float speed2, int time) {
+    float distance1 = speed1 * time;
+    float distance2 = speed2 * time;
+    return distance - (distance1 + distance2);  // Will be 0 at meeting point
 }
 
 int main() {
-    float total, used, remaining;
-    
-    // Input from user
-    printf("Enter total area: ");
-    scanf("%f", &total);
-    printf("Enter used area: ");
-    scanf("%f", &used);
-    
-    // Calculate remaining area
-    remaining = calculate_remaining_area(total, used);
-    
-    // Display result
-    printf("Remaining area: %.2f\n", remaining);
-    
+    float speed1, time, speed2;
+    const float distance = 1.0;  // Fixed distance of 1 km
+
+    printf("Enter speed of the first pedestrian (km/h): ");
+    scanf("%f", &speed1);
+
+    printf("Enter meeting time (hours): ");
+    scanf("%d", &time);
+
+    // Calculate speed of second pedestrian (V2 = (Distance - V1*time)/time)
+    speed2 = (distance - speed1 * time) / time;
+
+    printf("Speed of the second pedestrian: %.2f km/h\n", speed2);
+
+    // Call additional function (should return 0 when they meet)
+    float remaining = calculate_remaining_distance(distance, speed1, speed2, time);
+    printf("Remaining distance between them at meeting time: %.4f km\n", remaining);
+
     return 0;
 }
+
