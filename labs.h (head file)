@@ -1,0 +1,12 @@
+#ifndef LABS_H
+#define LABS_H
+
+#include <stdio.h>
+#include <ctype.h>  // For character handling functions
+
+void lab1();
+void lab2();
+void lab3();  // Prototype for our new lab function
+int count_long_words(int min_length);  // Function to count words
+
+#endif
