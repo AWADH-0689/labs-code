@@ -1,0 +1,50 @@
+// Online C compiler to run C program online
+#include<stdio.h>
+
+double sum(float x, int N, int P) {
+    double total_sum = 0;
+    int terms = 1;
+
+    
+    // Calculate N^P without pow()
+    for(int i = 0; i < P; i++) {
+        terms *= N;
+    }
+    
+    double x_power = x;       // Tracks x^n (starts at x^1)
+    int sign = 1;             // Tracks (-1)^(n+1) (starts at +1 for n=1)
+    
+    for(int n = 1; n <= terms; n++) {
+        double term = sign * x_power / n; 
+        total_sum += term;
+        
+        // Update for next iteration:
+        x_power *= x;         // x^n → x^(n+1)
+        sign *= -1;           // Flip the sign
+    }
+    return total_sum;
+}
+
+int main() {
+    // Parameters
+    float x;
+    int N, P;
+    
+    // Input
+    printf("Enter value of x: ");
+    scanf("%f", &x);
+    
+    printf("Enter value of N: ");
+    scanf("%d", &N);
+    
+    printf("Enter value of P: ");
+    scanf("%d", &P);
+    
+    // Calculation
+    double result = sum(x, N, P);
+    
+    // Output
+    printf("The sum of the first %d^%d elements of series is: %.2f\n", N, P, result);
+    
+    return 0;
+}
