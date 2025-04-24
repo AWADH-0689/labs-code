@@ -1,0 +1,36 @@
+ #include "labs.h"
+
+int main() {
+    int choice;
+    
+    while(1) {
+        printf("\n=== Main Menu ===\n");
+        printf("1. Lab 1\n");
+        printf("2. Lab 2\n");
+        printf("3. Lab 3 - Count long words\n");
+        printf("13. Exit\n");
+        printf("Enter your choice: ");
+        
+        scanf("%d", &choice);
+        
+        switch(choice) {
+            case 1:
+                lab1();
+                break;
+            case 2:
+                lab2();
+                break;
+            case 3:
+                lab3();
+                break;
+            case 13:
+                printf("Exiting program. Goodbye!\n");
+                return 0;
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+        
+        // Clear input buffer in case of extra characters
+        while(getchar() != '\n');
+    }
+}
