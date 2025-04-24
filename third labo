@@ -1,0 +1,56 @@
+#include <stdio.h>
+
+// defining symbolic constants
+#define YES 1
+#define NO 0
+
+int main(void)
+{
+    int c;          // current character from the stream
+    int prev_c;      // previous character
+    int flag;        // word sign
+    int cnt;         // counter for words with >N letters
+    int letter_cnt;  // counter for letters in current word
+    int N;           // minimum number of letters to count a word
+    
+    // Get N from user
+    printf("Enter the minimum number of letters (N): ");
+    scanf("%d", &N);
+    getchar(); // consume the newline character
+    
+    // initial assignments (initialization)
+    cnt = 0;
+    flag = NO;
+    letter_cnt = 0;
+    prev_c = ' ';
+    
+    // loop reading characters from the stream associated with keyboard
+    while((c = getchar()) != EOF) {
+        if(c == ' ' || c == '\n' || c == '\t' || c == ',') {
+            // separator found
+            if(flag == YES) {
+                // this is the first separator after the word
+                if(letter_cnt > N) {
+                    cnt = cnt + 1;
+                }
+                flag = NO;
+                letter_cnt = 0;
+            }
+        } else {
+            // not a separator - we're in a word
+            if(flag == NO) {
+                flag = YES;
+            }
+            letter_cnt = letter_cnt + 1;
+            prev_c = c;
+        }
+    }
+    
+    // handle case where file ends without a separator
+    if(flag == YES && letter_cnt > N) {
+        cnt = cnt + 1;
+    }
+    
+    printf("Number of words with more than %d letters: %d\n", N, cnt);
+    return 0;
+}
