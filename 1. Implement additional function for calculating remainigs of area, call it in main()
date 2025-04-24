@@ -1,0 +1,24 @@
+#include <stdio.h>
+
+// Function to calculate remaining area
+float calculate_remaining_area(float total_area, float used_area) {
+    return total_area - used_area;
+}
+
+int main() {
+    float total, used, remaining;
+    
+    // Input from user
+    printf("Enter total area: ");
+    scanf("%f", &total);
+    printf("Enter used area: ");
+    scanf("%f", &used);
+    
+    // Calculate remaining area
+    remaining = calculate_remaining_area(total, used);
+    
+    // Display result
+    printf("Remaining area: %.2f\n", remaining);
+    
+    return 0;
+}
