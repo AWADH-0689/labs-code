@@ -1,0 +1,28 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+
+float calc_speed_man(float L,float V1, int t){ 
+    return (L-(V1*t))/t;                                                      }
+
+
+int main() {
+    // Given data
+    float V1; // speed of first man
+    float L;// distance between them
+    int t; // total time to meet
+    // parameter
+    printf("Enter value of V1:");
+    scanf("%f",&V1);
+    
+      printf("Enter value of L:");
+    scanf("%f",&L);
+    
+     printf("Enter value of t:");
+    scanf("%d",&t);
+     // Calculate the speed of the second man
+    float speed_second_man = calc_speed_man(L,V1,t);
+    
+  // Output the result
+    printf("Speed of the second man: %.2f km/h\n", speed_second_man);
+ return 0;
+} 
