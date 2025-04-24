@@ -1,24 +1,30 @@
 #include <stdio.h>
 
+float calculate_remaining_area(float total_area, float used_area) {
+    return total_area - used_area;
+}
+
 int main() {
-    float x, sum = 0.0, current_power;
-    int N, counter = 1;
-    int sign = 1; // Controls the alternating sign
-
-    printf("Enter x: ");
-    scanf("%f", &x);
-    printf("Enter N (number of terms): ");
-    scanf("%d", &N);
-
-    current_power = x; // Initialize with x^1
-
-    while (counter <= N) {
-        sum += sign * current_power / counter;
-        current_power *= x; // Update x^n to x^(n+1) for next term
-        sign *= -1; // Flip the sign
-        counter++; // Move to the next term
+    int count = 0;
+    int num_calculations;
+    
+    printf("How many area calculations do you want to perform? ");
+    scanf("%d", &num_calculations);
+    
+    while(count < num_calculations) {
+        float total, used, remaining;
+        
+        printf("\nCalculation #%d:\n", count + 1);
+        printf("Enter the total area: ");
+        scanf("%f", &total);
+        printf("Enter the used area: ");
+        scanf("%f", &used);
+        
+        remaining = calculate_remaining_area(total, used);
+        printf("Remaining area: %.2f\n", remaining);
+        
+        count++;
     }
-
-    printf("Sum of the first %d terms: %.4f\n", N, sum);
+    
     return 0;
 }
