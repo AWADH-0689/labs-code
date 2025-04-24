@@ -1,0 +1,85 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define ROWS 3
+#define COLS 3
+
+// Функция для вычисления суммы строки
+int row_sum(int arr[ROWS][COLS], int row) {
+    int sum = 0;
+    for (int j = 0; j < COLS; j++) {
+        sum += arr[row][j];
+    }
+    return sum;
+}
+
+// Функция для обнуления строки с минимальной суммой
+void zero_min_sum_row(int arr[ROWS][COLS]) {
+    int min_sum = row_sum(arr, 0);
+    int min_row = 0;
+
+    // Находим строку с минимальной суммой
+    for (int i = 1; i < ROWS; i++) {
+        int current_sum = row_sum(arr, i);
+        if (current_sum < min_sum) {
+            min_sum = current_sum;
+            min_row = i;
+        }
+    }
+
+    // Обнуляем строку
+    for (int j = 0; j < COLS; j++) {
+        arr[min_row][j] = 0;
+    }
+}
+
+// Функция для транспонирования строки и столбца по выбранному элементу
+void transpose_row_col(int arr[ROWS][COLS], int row, int col) {
+    // Проверка на валидность индексов
+    if (row >= ROWS || col >= COLS) {
+        printf("Неверные индексы!\n");
+        return;
+    }
+
+    // Меняем местами элементы строки и столбца
+    for (int i = 0; i < ROWS; i++) {
+        if (i != row) { // Исключаем сам выбранный элемент
+            int temp = arr[i][col];
+            arr[i][col] = arr[row][i];
+            arr[row][i] = temp;
+        }
+    }
+}
+
+void print_matrix(int arr[ROWS][COLS]) {
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
+            printf("%d ", arr[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int arr[ROWS][COLS] = {
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    };
+
+    printf("Исходная матрица:\n");
+    print_matrix(arr);
+
+    // Обнуляем строку с минимальной суммой
+    zero_min_sum_row(arr);
+    printf("\nМатрица после обнуления строки с минимальной суммой:\n");
+    print_matrix(arr);
+
+    // Транспонируем строку и столбец для элемента (1,1) - значение 5
+    printf("\nТранспонирование строки и столбца для элемента (1,1):\n");
+    transpose_row_col(arr, 1, 1);
+    print_matrix(arr);
+
+    return 0;
+}
