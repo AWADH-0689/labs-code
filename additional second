@@ -1,0 +1,24 @@
+#include <stdio.h>
+
+int main() {
+    float x, sum = 0.0, current_power;
+    int N, counter = 1;
+    int sign = 1; // Controls the alternating sign
+
+    printf("Enter x: ");
+    scanf("%f", &x);
+    printf("Enter N (number of terms): ");
+    scanf("%d", &N);
+
+    current_power = x; // Initialize with x^1
+
+    while (counter <= N) {
+        sum += sign * current_power / counter;
+        current_power *= x; // Update x^n to x^(n+1) for next term
+        sign *= -1; // Flip the sign
+        counter++; // Move to the next term
+    }
+
+    printf("Sum of the first %d terms: %.4f\n", N, sum);
+    return 0;
+}
