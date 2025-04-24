@@ -1,0 +1,45 @@
+ #include "labs.h"
+
+void lab1() {
+    // Implementation of lab task 1
+}
+
+void lab2() {
+    // Implementation of lab task 2
+}
+
+void lab3() {
+    int min_length;
+    printf("Enter minimum word length to count: ");
+    scanf("%d", &min_length);
+    getchar();  // Consume the newline character
+    
+    printf("Enter text (press Ctrl+D/Z to end input):\n");
+    int count = count_long_words(min_length);
+    printf("Number of words with more than %d letters: %d\n", min_length, count);
+}
+
+int count_long_words(int min_length) {
+    int ch, word_length = 0, count = 0;
+    int in_word = 0;  // Flag to track if we're inside a word
+    
+    while ((ch = getchar()) != EOF) {
+        if (isalpha(ch)) {
+            word_length++;
+            in_word = 1;
+        } else {
+            if (in_word && word_length > min_length) {
+                count++;
+            }
+            word_length = 0;
+            in_word = 0;
+        }
+    }
+    
+    // Check the last word in case input ends without a separator
+    if (in_word && word_length > min_length) {
+        count++;
+    }
+    
+    return count;
+}
