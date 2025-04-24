@@ -1,0 +1,43 @@
+ #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+void remove_extra_spaces(char *str) {
+    int i = 0, j = 0;
+    int space_flag = 0; // Флаг, указывающий на предыдущий пробел
+    
+    while (str[i]) {
+        // Если текущий символ не пробел
+        if (!isspace(str[i])) {
+            str[j++] = str[i++];
+            space_flag = 0;
+        }
+        // Если текущий символ пробел и предыдущий не был пробелом
+        else if (space_flag == 0) {
+            str[j++] = str[i++];
+            space_flag = 1;
+        }
+        // Если текущий и предыдущий символы пробелы
+        else {
+            i++;
+        }
+    }
+    str[j] = '\0'; // Завершаем строку
+}
+
+int main() {
+    char input[1024];
+    
+    printf("Введите строку с лишними пробелами:\n");
+    fgets(input, sizeof(input), stdin);
+    
+    // Удаляем символ новой строки от fgets
+    input[strcspn(input, "\n")] = '\0';
+    
+    remove_extra_spaces(input);
+    
+    printf("Результат после удаления лишних пробелов:\n%s\n", input);
+    
+    return 0;
+}
